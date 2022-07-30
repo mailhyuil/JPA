@@ -23,6 +23,13 @@ public class UserServiceImpl implements UserService{
     }
 	
 	public List<User> getList(){
-		return userRepository.findByAll();
+		return userRepository.findAll();
+	}
+	
+	@Transactional
+	@Override
+	public int deleteUser(String username) {
+		userRepository.delete(username);
+		return 0;
 	}
 }

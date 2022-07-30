@@ -25,4 +25,10 @@ public class HomeController {
 		userService.join(user);
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String delete(String username) {
+		userService.deleteUser(username);
+		return "redirect:/";
+	}
 }

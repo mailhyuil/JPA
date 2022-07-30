@@ -14,4 +14,6 @@ public interface UserService {
     public String join(User user);
 	
 	public List<User> getList();
+	
+	public int deleteUser(String username);
 }

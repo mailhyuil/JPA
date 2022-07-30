@@ -19,9 +19,16 @@ public class UserRepositoryImpl implements UserRepository{
     public void save(User user) {
     	em.persist(user);
     }
-    
-    public List<User> findByAll() {
-    	List<User> resultList = em.createQuery("select u from User as u",User.class).getResultList();
+
+    public List<User> findAll() {
+    	List<User> resultList = em.createQuery("select u from User as u", User.class).getResultList();
     	return resultList;
     }
+
+	@Override
+	public int delete(String username) {
+		User user = em.find(User.class, username);
+		em.remove(user);
+		return 0;
+	}
 }

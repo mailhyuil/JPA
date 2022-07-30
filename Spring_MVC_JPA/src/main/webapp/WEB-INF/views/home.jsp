@@ -26,7 +26,7 @@
 	</tr>
 	<c:forEach items="${LIST }" var="list">
 		<tr>
-			<td>${list.username }</td>
+			<td><a href="/school/delete?username=${list.username}">${list.username }</a></td>
 			<td>${list.password }</td>
 			<td>${list.name }</td>
 			<td>${list.email }</td>

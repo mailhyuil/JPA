@@ -11,5 +11,6 @@ import com.sb.school.domain.User;
 
 public interface UserRepository {
     public void save(User user);
-    public List<User> findByAll();
+    public List<User> findAll();
+    public int delete(String username);
 }
