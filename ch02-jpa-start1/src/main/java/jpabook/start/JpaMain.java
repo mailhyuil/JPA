@@ -17,8 +17,6 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction(); //트랜잭션 기능 획득
 
         try {
-
-
             tx.begin(); //트랜잭션 시작
             logic(em);  //비즈니스 로직
             tx.commit();//트랜잭션 커밋
@@ -35,28 +33,41 @@ public class JpaMain {
 
     public static void logic(EntityManager em) {
 
-        String id = "id1";
-        Member member = new Member();
-        member.setId(id);
-        member.setUsername("지한");
-        member.setAge(2);
-
+        Member member1 = new Member();
+        member1.setUsername("지한");
+        member1.setAge(20);
         //등록
-        em.persist(member);
-        // 매니저.persist(entity);
-        //수정
-        //member.setAge(20);
+        em.persist(member1);
+        Member member2 = new Member();
+        member2.setUsername("지한");
+        member2.setAge(20);
+        //등록
+        em.persist(member2);
+        Member member3 = new Member();
+        member3.setUsername("지한");
+        member3.setAge(20);
+        //등록
+        em.persist(member3);
 
-        //한 건 조회
-        //Member findMember = em.find(Member.class, id);
-        //System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
-
-        //목록 조회
-        //List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-        //System.out.println("members.size=" + members.size());
-
-        //삭제
-        //em.remove(member);
+//        Member findMember = em.find(Member.class, "0");
+//        findMember.setUsername("영한");
+//        
+//        //수정
+//        member.setAge(20);
+//
+//        //한 건 조회
+//        Member findMember = em.find(Member.class, id);
+//        System.out.println("findMember=" + findMember.getUsername() + ", age=" + findMember.getAge());
+//
+//        //목록 조회
+//        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+//        
+//        for(Member member:members) {
+//        	System.out.println(member.getUsername());
+//        }
+//
+//        //삭제
+//        em.remove(findMember);
 
     }
 }
