@@ -28,7 +28,7 @@ public class Classes {
 	@Column(name = "SUBJECT")
 	private String subject;
 	
-	@OneToMany(fetch = FetchType.EAGER,mappedBy = "class_code")
+	@OneToMany(mappedBy = "class_code", fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
 
 	public String getClass_code() {
