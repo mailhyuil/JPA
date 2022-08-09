@@ -13,4 +13,6 @@ public interface UserRepository {
     public void save(User user);
     public List<User> findAll();
     public int delete(String username);
+    public String findClassByUsername(String username);
+    public List<User> findListByClassCode(String class_code);
 }
