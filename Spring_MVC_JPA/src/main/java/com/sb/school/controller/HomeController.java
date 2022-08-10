@@ -1,5 +1,7 @@
 package com.sb.school.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.sb.school.domain.Classes;
 import com.sb.school.domain.QUser;
 import com.sb.school.domain.User;
 import com.sb.school.repository.UserRepository;
@@ -22,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	@Autowired
 	UserService userService;
+	
 	@Autowired
 	UserRepository userRepository;
 
@@ -30,6 +34,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
+		
 						/* QueryDSL */
 //		  JPAQuery<EntityManager> query = new JPAQuery<>(em);
 		  JPAQueryFactory queryFactory = new JPAQueryFactory(em);
@@ -43,10 +48,19 @@ public class HomeController {
 				  .where(user.username.eq("sb"))
 				  .orderBy(user.username.desc())
 				  .fetchOne();
-
-		  System.out.println("result : " + foundUser);
 		  
 		  log.debug("foundUser {}", foundUser.toString());
+		  
+		  				/* Spring-Data */
+		  List<User> foundUsers = userRepository.findByPassword("1234");
+		  log.debug("foundUsersByPassword {}", foundUsers.toString());
+		  
+		  Classes cl = em.find(Classes.class, "0001");
+		  List<User> foundUsers2 = userRepository.findByClassCode(cl);
+		  log.debug("foundUsersByClass {}", foundUsers2.toString());
+		  
+		  User foundUser3 = userRepository.findOneByName("유상백");
+		  log.debug("foundUserByName {}", foundUser3.toString());
 		  
 		  					/* JPQL */
 //		  Query query1 = em.createQuery("select u from User u where u.username = :username", User.class); 
