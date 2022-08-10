@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	@Override
 	public int deleteUser(String username) {
-		userRepository.delete(username);
+		userRepository.deleteById(username);
 		return 0;
 	}
 }

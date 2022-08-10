@@ -23,20 +23,22 @@ import lombok.ToString;
 public class Classes {
 	@Id
 	@Column(name = "CLASS_CODE")
-	private String class_code;
+	private String classCode;
 	
 	@Column(name = "SUBJECT")
 	private String subject;
 	
-	@OneToMany(mappedBy = "class_code", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "classCode", fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
 
-	public String getClass_code() {
-		return class_code;
+
+
+	public String getClassCode() {
+		return classCode;
 	}
 
-	public void setClass_code(String class_code) {
-		this.class_code = class_code;
+	public void setClassCode(String classCode) {
+		this.classCode = classCode;
 	}
 
 	public String getSubject() {

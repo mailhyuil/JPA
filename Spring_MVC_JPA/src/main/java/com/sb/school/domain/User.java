@@ -32,5 +32,5 @@ public class User {
 	private String email;
 	@ManyToOne
 	@JoinColumn(name = "CLASS_CODE")
-	private Classes class_code;
+	private Classes classCode;
 }

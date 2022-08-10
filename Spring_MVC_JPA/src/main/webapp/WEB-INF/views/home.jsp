@@ -23,6 +23,7 @@
 		<th>name</th>
 		<th>email</th>
 		<th>role</th>
+		<th>삭제</th>
 	</tr>
 	<c:forEach items="${LIST }" var="list">
 		<tr>
@@ -31,6 +32,7 @@
 			<td>${list.name }</td>
 			<td>${list.email }</td>
 			<td>${list.role }</td>
+			<td><a href="/school/delete?username=${list.username}">삭제</a></td>
 		</tr>
 	</c:forEach>
 </table>

@@ -2,17 +2,16 @@ package com.sb.school.repository;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.sb.school.domain.User;
 
-public interface UserRepository {
-    public void save(User user);
-    public List<User> findAll();
-    public int delete(String username);
+
+public interface UserRepository extends JpaRepository<User, String>{
+    
+    public User findOneByUsername(String username);
+//    public void deleteByUsername(String username); // deleteById가 기본으로 정의되어 있음
+    
     public String findClassByUsername(String username);
     public List<User> findListByClassCode(String class_code);
 }
