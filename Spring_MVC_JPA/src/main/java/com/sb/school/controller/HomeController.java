@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sb.school.domain.Classes;
+import com.sb.school.domain.QClasses;
 import com.sb.school.domain.QUser;
 import com.sb.school.domain.User;
 import com.sb.school.repository.UserRepository;
@@ -24,14 +25,15 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class HomeController {
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@PersistenceContext
-	EntityManager em;
-
+	private EntityManager em;
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		
@@ -53,14 +55,14 @@ public class HomeController {
 		  
 		  				/* Spring-Data */
 		  List<User> foundUsers = userRepository.findByPassword("1234");
-		  log.debug("foundUsersByPassword {}", foundUsers.toString());
+		  log.debug("foundByPassword {}", foundUsers.toString());
 		  
 		  Classes cl = em.find(Classes.class, "0001");
 		  List<User> foundUsers2 = userRepository.findByClassCode(cl);
-		  log.debug("foundUsersByClass {}", foundUsers2.toString());
+		  log.debug("foundByClass {}", foundUsers2.toString());
 		  
 		  User foundUser3 = userRepository.findOneByName("유상백");
-		  log.debug("foundUserByName {}", foundUser3.toString());
+		  log.debug("foundOneByName {}", foundUser3.toString());
 		  
 		  					/* JPQL */
 //		  Query query1 = em.createQuery("select u from User u where u.username = :username", User.class); 
@@ -75,8 +77,28 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String home(User user) {
-		userService.join(user);
+	public String home(User user, String className) {
+		
+		JPAQueryFactory queryFactory = new JPAQueryFactory(em);
+		
+		QClasses classes = QClasses.classes;
+		
+		Classes cl = queryFactory
+				.selectFrom(classes)
+				.where(classes.subject.eq(className))
+				.fetchOne();
+		
+		log.debug("fetchedClasses {}", cl);
+		
+		user.setClassCode(cl);
+		
+		try {		
+			userService.join(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.debug("이미 존재하는 회원입니다");
+		}
+		
 		return "redirect:/";
 	}
 

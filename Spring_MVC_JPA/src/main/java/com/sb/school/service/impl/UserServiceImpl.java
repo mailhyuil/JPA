@@ -17,8 +17,14 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	
 	@Transactional
-    public String join(User user) {
-        userRepository.save(user);
+    public String join(User user) throws Exception {
+		
+		if(userRepository.findById(user.getUsername()) != null) {
+			userRepository.save(user);			
+		} else {
+			throw new Exception();
+		}
+		
         return user.getUsername();
     }
 	

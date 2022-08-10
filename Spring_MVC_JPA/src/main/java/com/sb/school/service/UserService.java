@@ -11,7 +11,7 @@ import com.sb.school.repository.UserRepository;
 
 public interface UserService {
 	
-    public String join(User user);
+    public String join(User user) throws Exception;
 	
 	public List<User> getList();
 	
