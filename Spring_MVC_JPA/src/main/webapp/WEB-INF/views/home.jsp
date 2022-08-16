@@ -6,7 +6,7 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>Insert title here</title>
-			<link rel="stylesheet" href="static/css/style.css?dsfdsfdfsssddssfdsfdf" />
+			<link rel="stylesheet" href="static/css/style.css?dsfddfhdff" />
 		</head>
 
 		<body>
@@ -28,16 +28,18 @@
 					<th>name</th>
 					<th>email</th>
 					<th>role</th>
+					<th>class</th>
 					<th>삭제</th>
 				</tr>
 				<c:forEach items="${LIST }" var="list">
 					<tr>
-						<td class="border-separate border-red-100 border"><a href="/school/delete?username=${list.username}">${list.username }</a></td>
+						<td class="border-separate border-red-100 border">${list.username }</td>
 						<td class="border-separate border-red-100 border">${list.password }</td>
 						<td class="border-separate border-red-100 border">${list.name }</td>
 						<td class="border-separate border-red-100 border">${list.email }</td>
 						<td class="border-separate border-red-100 border">${list.role }</td>
-						<td class="border-separate border-red-100 border"><a href="/school/delete?username=${list.username}">삭제</a></td>
+						<td class="border-separate border-red-100 border">${list.classCode.subject }</td>
+						<td class="border-separate border-red-100 border text-red-500"><a href="/school/delete?username=${list.username}">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</table>
